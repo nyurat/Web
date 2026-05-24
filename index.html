@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYURAT - Aplikasi Template Surat</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="preloader.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23grad)'/%3E%3Ctext x='16' y='20' font-family='Arial, sans-serif' font-size='10' font-weight='bold' text-anchor='middle' fill='white'%3ENY%3C/text%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23grad)'/%3E%3Ctext x='16' y='20' font-family='Arial, sans-serif' font-size='10' font-weight='bold' text-anchor='middle' fill='white'%3ENY%3C/text%3E%3C/svg%3E">
+    <link rel="shortcut icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23grad)'/%3E%3Ctext x='16' y='20' font-family='Arial, sans-serif' font-size='10' font-weight='bold' text-anchor='middle' fill='white'%3ENY%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-particles">
+            <div class="preloader-particle"></div>
+            <div class="preloader-particle"></div>
+            <div class="preloader-particle"></div>
+            <div class="preloader-particle"></div>
+            <div class="preloader-particle"></div>
+            <div class="preloader-particle"></div>
+        </div>
+        <div class="preloader-content">
+            <div class="preloader-logo">
+                <img src="assets/logo.svg" alt="NYURAT Logo" class="preloader-logo-img">
+            </div>
+            <div class="preloader-dots">
+                <div class="preloader-dot"></div>
+                <div class="preloader-dot"></div>
+                <div class="preloader-dot"></div>
+            </div>
+            <div class="preloader-progress">
+                <div class="preloader-progress-fill"></div>
+            </div>
+            <div class="preloader-text">Memuat Platform...</div>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="assets/logo.svg" alt="NYURAT Logo">
+                <h1>NYURAT</h1>
+            </div>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="#beranda" class="nav-link active" data-page="beranda"><i class="fas fa-home"></i> Beranda</a></li>
+                    <li><a href="#contoh" class="nav-link" data-page="contoh"><i class="fas fa-file-alt"></i> Contoh Surat</a></li>
+                    <li><a href="#jenis" class="nav-link" data-page="jenis"><i class="fas fa-list"></i> Jenis Surat</a></li>
+                    <li><a href="#template" class="nav-link" data-page="template"><i class="fas fa-edit"></i> Template Surat</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <div class="main-container">
+            <header class="header">
+                <div class="container">
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </header>
+            
+            <main class="main">
+                <div class="container">
+            <!-- Beranda Page -->
+            <section id="beranda" class="page active">
+                <div class="hero">
+                    <div class="hero-particles">
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                    </div>
+                    <div class="hero-badge">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Project Mata Kuliah Bahasa Indonesia</span>
+                    </div>
+                    <h1 class="hero-title">
+                        <span class="title-main">NYURAT</span>
+                        <span class="title-sub">Platform</span>
+                    </h1>
+                    <div class="hero-stats">
+                        <div class="stat-item" data-count="3">
+                            <div class="stat-number">3</div>
+                            <div class="stat-label">Jenis Surat</div>
+                        </div>
+                        <div class="stat-item" data-count="3">
+                            <div class="stat-number">3</div>
+                            <div class="stat-label">Template</div>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-image-container">
+                        <div class="hero-image-wrapper">
+                            <img src="assets/BERANDA.png" alt="NYURAT Platform" class="hero-image">
+                            <div class="image-glow"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-cta">
+                        <button class="btn btn-primary btn-large" onclick="navigateToPage('template')">
+                            <i class="fas fa-edit"></i> 
+                            <span>Mulai Menulis Surat</span>
+                            <div class="btn-ripple"></div>
+                        </button>
+                        <button class="btn btn-secondary btn-outline" onclick="navigateToPage('contoh')">
+                            <i class="fas fa-book-open"></i> 
+                            <span>Lihat Contoh</span>
+                            <div class="btn-ripple"></div>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="intro-section">
+                    <div class="intro-content">
+                        <div class="section-badge">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Tentang Platform</span>
+                        </div>
+                        <h3>Apa itu NYURAT?</h3>
+                        <p>NYURAT adalah platform pembelajaran interaktif yang dirancang khusus untuk membantu mahasiswa meningkatkan kemampuan penulisan surat formal dan profesional.</p>
+                        <div class="intro-features">
+                            <div class="intro-feature" data-aos="fade-right">
+                                <div class="feature-icon-wrapper">
+                                    <i class="fas fa-laptop-code"></i>
+                                </div>
+                                <h4>UMUM</h4>
+                                <p>Dikembangkan khusus untuk kebutuhan mahasiswa dengan interface modern</p>
+                            </div>
+                            <div class="intro-feature" data-aos="fade-up">
+                                <div class="feature-icon-wrapper">
+                                    <i class="fas fa-language"></i>
+                                </div>
+                                <h4>Bahasa Indonesia</h4>
+                                <p>Materi bahasa yang komprehensif dan terstruktur untuk pembelajaran efektif</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="features">
+                    <div class="section-header">
+                        <div class="section-badge">
+                            <i class="fas fa-star"></i>
+                            <span>Fitur Unggulan</span>
+                        </div>
+                        <h3>Fitur Utama NYURAT</h3>
+                        <p>Pelajari dan praktikkan penulisan surat profesional melalui berbagai fitur interaktif</p>
+                    </div>
+                    <div class="features-grid">
+                        <div class="feature-card" data-aos="zoom-in" data-aos-delay="100">
+                            <div class="feature-icon-wrapper">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h3>Surat Benar</h3>
+                            <p>Analisis mendalam contoh surat yang sudah sesuai kaidah penulisan formal untuk referensi pembelajaran</p>
+                            <div class="feature-tags">
+                                <span class="tag">Standar</span>
+                                <span class="tag">Referensi</span>
+                            </div>
+                            <div class="feature-action">
+                                <button class="btn btn-sm" onclick="navigateToPage('contoh')">
+                                    <i class="fas fa-arrow-right"></i> Lihat Contoh
+                                </button>
+                            </div>
+                        </div>
+                        <div class="feature-card" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="feature-icon-wrapper">
+                                <i class="fas fa-times-circle"></i>
+                            </div>
+                            <h3>Surat Salah</h3>
+                            <p>Identifikasi dan pahami kesalahan umum dalam penulisan surat beserta koreksinya</p>
+                            <div class="feature-tags">
+                                <span class="tag error">Error Analysis</span>
+                                <span class="tag">Pembelajaran</span>
+                            </div>
+                            <div class="feature-action">
+                                <button class="btn btn-sm" onclick="navigateToPage('contoh')">
+                                    <i class="fas fa-arrow-right"></i> Analisis Error
+                                </button>
+                            </div>
+                        </div>
+                        <div class="feature-card" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="feature-icon-wrapper">
+                                <i class="fas fa-file-contract"></i>
+                            </div>
+                            <h3>Jenis Surat</h3>
+                            <p>Pelajari 3 kategori utama surat: Dinas, Niaga, dan Pribadi dengan contoh lengkap</p>
+                            <div class="feature-tags">
+                                <span class="tag">Komprehensif</span>
+                                <span class="tag">Kategori</span>
+                            </div>
+                            <div class="feature-action">
+                                <button class="btn btn-sm" onclick="navigateToPage('jenis')">
+                                    <i class="fas fa-arrow-right"></i> Jelajahi Jenis
+                                </button>
+                            </div>
+                        </div>
+                        <div class="feature-card" data-aos="zoom-in" data-aos-delay="400">
+                            <div class="feature-icon-wrapper">
+                                <i class="fas fa-magic"></i>
+                            </div>
+                            <h3>Template 3</h3>
+                            <p>Gunakan template interaktif untuk praktik langsung</p>
+                            <div class="feature-tags">
+                                <span class="tag">Interaktif</span>
+                                <span class="tag">Praktis</span>
+                            </div>
+                            <div class="feature-action">
+                                <button class="btn btn-sm" onclick="navigateToPage('template')">
+                                    <i class="fas fa-arrow-right"></i> Mulai Praktik
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="learning-path">
+                    <div class="section-header">
+                        <div class="section-badge">
+                            <i class="fas fa-route"></i>
+                            <span>Learning Journey</span>
+                        </div>
+                        <h3>Path Pembelajaran</h3>
+                        <p>Ikuti langkah-langkah sistematis untuk meningkatkan kemampuan penulisan surat secara terstruktur</p>
+                    </div>
+                    <div class="path-steps">
+                        <div class="path-step" data-aos="fade-right">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="step-icon">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <h4>Pemahaman Dasar</h4>
+                                <p>Pelajari konsep dasar penulisan surat dan aturan format yang benar</p>
+                                <div class="step-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="path-step" data-aos="fade-up">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="step-icon">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <h4>Analisis Contoh</h4>
+                                <p>Studi kasus surat benar dan salah untuk pemahaman mendalam</p>
+                                <div class="step-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="path-step" data-aos="fade-left">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="step-icon">
+                                    <i class="fas fa-edit"></i>
+                                </div>
+                                <h4>Praktik Template</h4>
+                                <p>Gunakan template interaktif untuk praktik penulisan langsung</p>
+                                <div class="step-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contoh Surat Page -->
+            <section id="contoh" class="page">
+                <h2>Contoh Surat: Benar vs Salah</h2>
+                <div class="comparison-container">
+                    <div class="example-card correct">
+                        <h3><i class="fas fa-check"></i> Contoh Surat Benar</h3>
+                        <div class="letter-content">
+                            <div class="example-header">
+                                <div class="example-badge success">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Contoh Baik</span>
+                                </div>
+                                <h4>Format Surat</h4>
+                                <p>Contoh surat yang sesuai dengan kaidah penulisan formal</p>
+                            </div>
+                            <div class="example-image-container">
+                                <img src="assets/SURAT BENAR.png" alt="Contoh Surat Benar" class="example-image" onclick="openZoom(this)">
+                                <div class="image-overlay">
+                                    <i class="fas fa-search-plus"></i>
+                                    <span>Klik untuk zoom</span>
+                                </div>
+                            </div>
+                            <div class="example-features">
+                                <div class="feature-item">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>Penulisan kapital yang benar</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>Penggunaan tanda baca yang tepat</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>Format surat yang standar</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>Ejaan yang sesuai kaidah</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="example-card incorrect">
+                        <h3><i class="fas fa-times"></i> Contoh Surat Salah</h3>
+                        <div class="letter-content">
+                            <div class="example-header">
+                                <div class="example-badge error">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <span>Kesalahan Penulisan</span>
+                                </div>
+                                <h4>Kesalahan Umum</h4>
+                                <p>Contoh kesalahan yang sering terjadi dalam penulisan surat formal</p>
+                            </div>
+                            <div class="example-image-container">
+                                <img src="assets/SURAT SALAH.png" alt="Contoh Surat Salah" class="example-image" onclick="openZoom(this)">
+                                <div class="image-overlay">
+                                    <i class="fas fa-search-plus"></i>
+                                    <span>Klik untuk zoom</span>
+                                </div>
+                            </div>
+                            <div class="example-features">
+                                <div class="feature-item">
+                                    <i class="fas fa-times text-danger"></i>
+                                    <span>Penulisan kapital yang salah</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-times text-danger"></i>
+                                    <span>Penggunaan singkatan tidak resmi</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-times text-danger"></i>
+                                    <span>Format surat tidak standar</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-times text-danger"></i>
+                                    <span>Ejaan yang tidak sesuai kaidah</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tips-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-lightbulb"></i> Tips Penulisan Penting</h3>
+                        <p>Panduan praktis untuk menulis surat yang profesional</p>
+                    </div>
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <div class="tip-icon">
+                                <i class="fas fa-font"></i>
+                            </div>
+                            <h4>Penulisan Kapital</h4>
+                            <p>Gunakan huruf kapital pada awal kalimat, nama orang, nama instansi, dan awal kutipan</p>
+                        </div>
+                        <div class="tip-card">
+                            <div class="tip-icon">
+                                <i class="fas fa-punctuation"></i>
+                            </div>
+                            <h4>Tanda Baca</h4>
+                            <p>Gunakan tanda baca yang tepat: koma untuk pemisah, titik untuk akhir kalimat</p>
+                        </div>
+                        <div class="tip-card">
+                            <div class="tip-icon">
+                                <i class="fas fa-spell-check"></i>
+                            </div>
+                            <h4>Ejaan Standar</h4>
+                            <p>Hindari singkatan seperti "yg", "dgn", "dll" dalam surat formal</p>
+                        </div>
+                        <div class="tip-card">
+                            <div class="tip-icon">
+                                <i class="fas fa-align-left"></i>
+                            </div>
+                            <h4>Format Surat</h4>
+                            <p>Ikuti struktur surat standar: kop, tanggal, tujuan, isi, penutup, tanda tangan</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Jenis Surat Page -->
+            <section id="jenis" class="page">
+                <h2>3 Jenis Surat yang Bisa Digunakan</h2>
+                <div class="types-container">
+                    <div class="type-card">
+                        <div class="type-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Surat Undangan Resmi</h3>
+                        <p>Surat resmi yang digunakan untuk mengundang mahasiswa dalam kegiatan akademik dan kemahasiswaan.</p>
+                        <ul>
+                            <li>Undangan Rapat</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="type-card">
+                        <div class="type-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3>Surat Permohonan</h3>
+                        <p>Surat yang dibuat oleh mahasiswa untuk meminta izin, rekomendasi, atau kebutuhan akademik kepada pihak berwenang kampus.</p>
+                        <ul>
+                            <li>Permohonan Kerja</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="type-card">
+                        <div class="type-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <h3>Surat Edaran</h3>
+                        <p>Surat resmi yang disebarkan kepada mahasiswa untuk memberitahukan informasi akademik, jadwal kegiatan, atau kebijakan kampus.</p>
+                        <ul>
+                            <li>Edaran Internal</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Template Surat Page -->
+            <section id="template" class="page">
+                <h2>Template Surat - Pilih dan Edit Langsung</h2>
+                <div class="template-container">
+                    <div class="template-sidebar">
+                        <div class="sidebar-header">
+                            <h3><i class="fas fa-file-alt"></i> Pilih Template</h3>
+                            <div class="template-search">
+                                <input type="text" id="templateSearch" placeholder="Cari template...">
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </div>
+                        <div class="template-list">
+                            <div class="template-category">
+                                <h4><i class="fas fa-envelope"></i> Surat Undangan</h4>
+                                <button class="template-btn active" data-template="surat-undangan-rapat">
+                                    <i class="fas fa-users"></i>
+                                    <span>Undangan Rapat</span>
+                                </button>
+                            </div>
+                            <div class="template-category">
+                                <h4><i class="fas fa-file-alt"></i> Surat Permohonan</h4>
+                                <button class="template-btn" data-template="surat-permohonan">
+                                    <i class="fas fa-file-signature"></i>
+                                    <span>Permohonan</span>
+                                </button>
+                            </div>
+                            <div class="template-category">
+                                <h4><i class="fas fa-calendar-check"></i> Surat Izin</h4>
+                                <button class="template-btn" data-template="surat-izin">
+                                    <i class="fas fa-user-check"></i>
+                                    <span>Izin</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-info">
+                            <div class="info-card">
+                                <h4><i class="fas fa-info-circle"></i> Info Template</h4>
+                                <p id="templateInfo">Pilih template surat yang sudah tersedia lalu edit langsung di editor.</p>
+                            </div>
+                            <div class="info-card">
+                                <h4><i class="fas fa-clock"></i> Auto-Save</h4>
+                                <p>Dokumen otomatis tersimpan setiap 30 detik</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="template-editor">
+                        <div class="editor-header">
+                            <div class="editor-title">
+                                <input type="text" id="documentTitle" placeholder="Judul Dokumen" value="Undangan Rapat">
+                                <div class="word-count">
+                                    <span id="wordCount">0</span> kata
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="editor-toolbar">
+                            <!-- File Operations -->
+                            <div class="toolbar-group">
+                                <button class="toolbar-btn" data-command="new" title="New Document"><i class="fas fa-file"></i></button>
+                                <button class="toolbar-btn" data-command="open" title="Open"><i class="fas fa-folder-open"></i></button>
+                                <button class="toolbar-btn" data-command="save" title="Save"><i class="fas fa-save"></i></button>
+                                <button class="toolbar-btn" data-command="saveAs" title="Save As"><i class="fas fa-save"></i></button>
+                            </div>
+                            <div class="toolbar-separator"></div>
+                            
+                            <!-- Undo/Redo -->
+                            <div class="toolbar-group">
+                                <button class="toolbar-btn" data-command="undo" title="Undo"><i class="fas fa-undo"></i></button>
+                                <button class="toolbar-btn" data-command="redo" title="Redo"><i class="fas fa-redo"></i></button>
+                            </div>
+                            <div class="toolbar-separator"></div>
+                            
+                            <!-- Font Formatting -->
+                            <div class="toolbar-group">
+                                <select class="toolbar-select" id="fontSelect">
+                                    <option value="Times New Roman">Times New Roman</option>
+                                    <option value="Arial">Arial</option>
+                                    <option value="Calibri">Calibri</option>
+                                    <option value="Verdana">Verdana</option>
+                                    <option value="Georgia">Georgia</option>
+                                    <option value="Courier New">Courier New</option>
+                                </select>
+                                <select class="toolbar-select" id="fontSizeSelect">
+                                    <option value="8pt">8pt</option>
+                                    <option value="10pt">10pt</option>
+                                    <option value="12pt" selected>12pt</option>
+                                    <option value="14pt">14pt</option>
+                                    <option value="16pt">16pt</option>
+                                    <option value="18pt">18pt</option>
+                                    <option value="20pt">20pt</option>
+                                    <option value="24pt">24pt</option>
+                                </select>
+                                <div class="color-picker-wrapper">
+                                    <input type="color" id="textColor" value="#000000" title="Text Color">
+                                    <button class="toolbar-btn" data-command="highlight" title="Highlight"><i class="fas fa-highlighter"></i></button>
+                                </div>
+                            </div>
+                            <div class="toolbar-separator"></div>
+                            
+                            <!-- Text Style -->
+                            <div class="toolbar-group">
+                                <button class="toolbar-btn" data-command="bold" title="Bold"><i class="fas fa-bold"></i></button>
+                                <button class="toolbar-btn" data-command="italic" title="Italic"><i class="fas fa-italic"></i></button>
+                                <button class="toolbar-btn" data-command="underline" title="Underline"><i class="fas fa-underline"></i></button>
+                                <button class="toolbar-btn" data-command="strikeThrough" title="Strikethrough"><i class="fas fa-strikethrough"></i></button>
+                                <button class="toolbar-btn" data-command="subscript" title="Subscript"><i class="fas fa-subscript"></i></button>
+                                <button class="toolbar-btn" data-command="superscript" title="Superscript"><i class="fas fa-superscript"></i></button>
+                            </div>
+                            <div class="toolbar-separator"></div>
+                            
+                            <!-- Text Case -->
+                            <div class="toolbar-group">
+                                <button class="toolbar-btn" data-command="uppercase" title="Uppercase"><i class="fas fa-font"></i> AA</button>
+                                <button class="toolbar-btn" data-command="lowercase" title="Lowercase"><i class="fas fa-font"></i> aa</button>
+                                <button class="toolbar-btn" data-command="capitalize" title="Capitalize"><i class="fas fa-font"></i> Aa</button>
+                            </div>
+                            <div class="toolbar-separator"></div>
+                            
+                            <!-- Alignment -->
+                            <div class="toolbar-group">
+                                <button class="toolbar-btn" data-command="justifyLeft" title="Align Left"><i class="fas fa-align-left"></i></button>
+                                <button class="toolbar-btn" data-command="justifyCenter" title="Align Center"><i class="fas fa-align-center"></i></button>
+                                <button class="toolbar-btn" data-command="justifyRight" title="Align Right"><i class="fas fa-align-right"></i></button>
+                                <button class="toolbar-btn" data-command="justifyFull" title="Justify"><i class="fas fa-align-justify"></i></button>
+                            </div>
+                            <div class="toolbar-separator"></div>
+                            
+                            <!-- Lists -->
+                            <div class="toolbar-group">
+                                <button class="toolbar-btn" data-command="insertOrderedList" title="Numbered List"><i class="fas fa-list-ol"></i></button>
+                                <button class="toolbar-btn" data-command="insertUnorderedList" title="Bulleted List"><i class="fas fa-list-ul"></i></button>
+                                <button class="toolbar-btn" data-command="outdent" title="Outdent"><i class="fas fa-outdent"></i></button>
+                                <button class="toolbar-btn" data-command="indent" title="Indent"><i class="fas fa-indent"></i></button>
+                            </div>
+                            <div class="toolbar-separator"></div>
+                            
+                            <!-- Insert -->
+                            <div class="toolbar-group">
+                                <button class="toolbar-btn" data-command="insertTable" title="Insert Table"><i class="fas fa-table"></i></button>
+                                <button class="toolbar-btn" data-command="insertLink" title="Insert Link"><i class="fas fa-link"></i></button>
+                                <button class="toolbar-btn" data-command="insertImage" title="Insert Image"><i class="fas fa-image"></i></button>
+                                <button class="toolbar-btn" data-command="insertDate" title="Insert Date"><i class="fas fa-calendar"></i></button>
+                            </div>
+                            <div class="toolbar-separator"></div>
+                            
+                            <!-- Periksa Teks & Tools -->
+                            <div class="toolbar-group">
+                                <button class="toolbar-btn" id="textCheckBtn" title="Periksa Tulisan"><i class="fas fa-spell-check"></i> Periksa</button>
+                                <button class="toolbar-btn" id="autoFormatBtn" title="Auto Format"><i class="fas fa-magic"></i> Format</button>
+                                <button class="toolbar-btn" id="previewBtn" title="Preview"><i class="fas fa-eye"></i> Preview</button>
+                                <button class="toolbar-btn" id="resetBtn" title="Reset"><i class="fas fa-redo"></i> Reset</button>
+                                <button class="toolbar-btn" id="downloadBtn" title="Download"><i class="fas fa-download"></i> Download</button>
+                                <button class="toolbar-btn" id="exportPdfBtn" title="Export PDF"><i class="fas fa-file-pdf"></i> PDF</button>
+                                <button class="toolbar-btn" data-command="findReplace" title="Find & Replace"><i class="fas fa-search"></i></button>
+                            </div>
+                            <div class="toolbar-separator"></div>
+                        
+                        <div class="editor-content-wrapper">
+                            <div class="editor-ruler">
+                                <div class="ruler-marks">
+                                    <span class="mark">0</span>
+                                    <span class="mark">5</span>
+                                    <span class="mark">10</span>
+                                    <span class="mark">15</span>
+                                    <span class="mark">20</span>
+                                </div>
+                            </div>
+                            <div class="editor-content" contenteditable="true" id="editor">
+                                <div class="letter-template" id="surat-undangan-rapat-template">
+                                    <div class="kop-surat">
+                                        <p><strong>(NAMA INSTANSI, DAN LOGO INSTANSI)</strong></p>
+                                        <p>Jl. (nama jalan) Kel. (kelurahan) Kec. (kecamatan) (daerah)</p>
+                                        <p>E-mail: (email instansi)</p>
+                                    </div>
+                                    <br>
+                                    <div class="surat-content">
+                                        <p><strong>UNDANGAN RAPAT</strong></p>
+                                        <p>(Tanggal surat dibuat)</p>
+                                        <p>Nomor: </p>
+                                        <p>Lampiran: </p>
+                                        <p>Hal: Surat Undangan</p>
+                                        <br>
+                                        <p>Yth. Bapak/Ibu Kepala Sekolah</p>
+                                        <p>Di tempat</p>
+                                        <br>
+                                        <p>Dalam rangka (deskripsi kegiatan yang akan dilakukan) yang akan dilaksanakan pada:</p>
+                                        <table style="width: 100%; border-collapse: collapse;">
+                                            <tr>
+                                                <td style="width: 150px;"><strong>Hari/Tanggal</strong></td>
+                                                <td>: </td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Pukul</strong></td>
+                                                <td>: </td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Tempat</strong></td>
+                                                <td>: </td>
+                                            </tr>
+                                        </table>
+                                        <br>
+                                        <p>Berkaitan dengan hal tersebut, kami mengharapkan (harapan penulis kepada seluruh anggota yang terlibat dalam kegiatan).</p>
+                                        <p>Demikian undangan ini kami sampaikan. Atas perhatian dan bantuan (Bapak/Ibu), kami ucapkan terima kasih.</p>
+                                        <br>
+                                        <p>Panitia Pelaksana (tema kegiatan)</p>
+                                        <p>(Jabatan penanggung jawab)</p>
+                                        <p>Nama: </p>
+                                        <p>NIP: </p>
+                                        <br>
+                                        <p>Hormat Kami,</p>
+                                        <br>
+                                        <p>Turut Mengundang,</p>
+                                        <p>……………. </p>
+                                        <p>(Jabatan panitia)</p>
+                                        <p>(Jabatan orang yang diundang)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="editor-footer">
+                            <div class="editor-actions">
+                                <button class="btn btn-primary" id="previewBtn"><i class="fas fa-eye"></i> Preview</button>
+                                <button class="btn btn-secondary" id="resetBtn"><i class="fas fa-undo"></i> Reset</button>
+                                <button class="btn btn-info" id="printBtn"><i class="fas fa-print"></i> Print</button>
+                                <button class="btn btn-success" id="downloadBtn"><i class="fas fa-download"></i> Download</button>
+                                <button class="btn btn-warning" id="exportPdfBtn"><i class="fas fa-file-pdf"></i> Export PDF</button>
+                                <button class="btn btn-primary" id="exportWordFooterBtn"><i class="fas fa-file-word"></i> Export Word</button>
+                            </div>
+                            <div class="text-status" id="textStatus">
+                                <i class="fas fa-check-circle"></i> Status: <span id="textStatusText">Ready</span>
+                            </div>
+                            <div class="editor-info">
+                                <span id="cursorPosition">Baris 1, Kolom 1</span>
+                                <span id="documentStatus">Tersimpan</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+                </div>
+            </main>
+
+            <footer class="footer">
+                <div class="container">
+                    <p>&copy; 2026 NYURAT - Aplikasi Template Surat. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    
+    <!-- Zoom Modal -->
+    <div id="zoomModal" class="zoom-modal" onclick="closeZoom()">
+        <div class="zoom-content">
+            <img id="zoomedImage" src="" alt="Zoomed Image">
+            <button class="zoom-close" onclick="closeZoom()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+</body>
+</html>
