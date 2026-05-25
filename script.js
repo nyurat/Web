@@ -78,10 +78,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 pages[index].classList.add('active');
             }
             
+            // Close mobile sidebar after selection
+            const sidebar = document.querySelector('.sidebar');
+            if (sidebar && window.innerWidth <= 768) {
+                sidebar.classList.remove('active');
+            }
+            
             // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.querySelector('.sidebar');
+
+    if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('active');
+        });
+    }
     
     // Hero counter animation
     const statItems = document.querySelectorAll('.stat-item');
@@ -553,14 +569,6 @@ document.addEventListener('DOMContentLoaded', function() {
             `);
             printWindow.document.close();
             printWindow.print();
-        });
-    }
-
-    // Export Word functionality
-    const exportWordBtn = document.getElementById('exportWordBtn');
-    if (exportWordBtn) {
-        exportWordBtn.addEventListener('click', function() {
-            exportToWord();
         });
     }
     
@@ -1083,114 +1091,4 @@ function showNotification(message, type = 'info') {
 function showTextTooltip(element, errors) {
     // Implementation for showing text error tooltips
     // This can be enhanced with a proper tooltip library
-}
-
-// ========== FITUR EXPORT KE WORD ==========
-function exportToWord() {
-    const editor = document.getElementById('editor');
-    const title = document.getElementById('documentTitle').value || 'Surat_Tanpa_Judul';
-    
-    // Ambil konten editor
-    let content = editor.innerHTML;
-    
-    // Perbaiki font dan margin untuk Word
-    const style = `
-        <style>
-            /* Reset margin dan padding untuk Word */
-            body {
-                margin: 2.54cm 3.17cm !important; /* Margin standar surat Indonesia */
-                padding: 0 !important;
-                font-family: 'Times New Roman', Times, serif !important;
-                font-size: 12pt !important;
-                line-height: 1.5 !important;
-                color: #000000 !important;
-                background: white !important;
-            }
-            
-            /* Kop surat */
-            .kop-surat {
-                text-align: center !important;
-                margin-bottom: 20px !important;
-                padding-bottom: 10px !important;
-                border-bottom: 2px solid #000000 !important;
-            }
-            
-            .kop-surat p {
-                margin: 5px 0 !important;
-            }
-            
-            /* Konten surat */
-            .surat-content {
-                text-align: left !important;
-            }
-            
-            .surat-content p {
-                margin: 8px 0 !important;
-            }
-            
-            /* Tabel */
-            table {
-                width: 100% !important;
-                border-collapse: collapse !important;
-                margin: 10px 0 !important;
-            }
-            
-            td {
-                padding: 5px !important;
-                vertical-align: top !important;
-            }
-            
-            /* Heading dan bold */
-            strong, b {
-                font-weight: bold !important;
-            }
-            
-            /* Menghilangkan background error highlight */
-            .text-error {
-                background: none !important;
-                border-bottom: none !important;
-                color: inherit !important;
-            }
-            
-            /* Memastikan tidak ada warna aneh */
-            * {
-                background-color: transparent !important;
-            }
-        </style>
-    `;
-    
-    // Gabungkan HTML lengkap untuk Word
-    const fullHtml = `<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>${title}</title>
-    ${style}
-</head>
-<body>
-    <div class="letter-template">
-        ${content}
-    </div>
-</body>
-</html>`;
-    
-    // Buat blob dengan tipe MIME untuk Word
-    const blob = new Blob([fullHtml], { type: 'application/msword' });
-    
-    // Buat link download
-    const link = document.createElement('a');
-    const url = URL.createObjectURL(blob);
-    link.href = url;
-    link.download = `${title.replace(/[\\/:*?"<>|]/g, '_')}.doc`; // Sanitasi nama file
-    
-    // Trigger download
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    
-    // Revoke URL
-    URL.revokeObjectURL(url);
-    
-    // Tampilkan notifikasi sukses
-    showNotification(`✅ File "${title}.doc" berhasil diunduh!`, 'success');
 }
