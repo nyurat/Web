@@ -524,11 +524,29 @@ document.addEventListener('DOMContentLoaded', function() {
     if (downloadBtn) {
         downloadBtn.addEventListener('click', function() {
             const content = editor.innerHTML;
-            const blob = new Blob([content], { type: 'text/html' });
+            const wordDocument = `<!DOCTYPE html>
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta charset="utf-8">
+<title>Surat Word</title>
+<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom></w:WordDocument></xml><![endif]-->
+<style>
+    body { font-family: 'Times New Roman', serif; }
+    .letter-template { width: 100%; }
+    .kop-surat { text-align: center; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #333; }
+    .surat-content p { margin-bottom: 5px; }
+    table { width: 100%; border-collapse: collapse; }
+</style>
+</head>
+<body>
+${content}
+</body>
+</html>`;
+            const blob = new Blob([wordDocument], { type: 'application/msword' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'surat_template.html';
+            a.download = 'surat_template.doc';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -659,11 +677,32 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // Update cursor position on click and keyup
-        editor.addEventListener('click', updateCursorPosition);
+        editor.addEventListener('click', function(event) {
+            updateCursorPosition();
+            handleEditorImageClick(event);
+        });
         editor.addEventListener('keyup', updateCursorPosition);
+        editor.addEventListener('scroll', function() {
+            if (activeImage) updateImageResizerPosition();
+        });
         editor.addEventListener('keydown', function() {
             setTimeout(updateCursorPosition, 0);
         });
+    }
+    
+    document.addEventListener('mousedown', function(event) {
+        const target = event.target;
+        if (activeImage && imageResizer && !imageResizer.contains(target) && target.tagName !== 'IMG') {
+            hideImageResizer();
+        }
+    });
+    
+    function handleEditorImageClick(event) {
+        const target = event.target;
+        const editor = document.getElementById('editor');
+        if (target && target.tagName === 'IMG' && editor && editor.contains(target)) {
+            showImageResizer(target);
+        }
     }
     
     // Load saved content on page load
@@ -672,6 +711,9 @@ document.addEventListener('DOMContentLoaded', function() {
         editor.innerHTML = savedContent;
     }
     
+    // Initialize image resize/drag support
+    enableImageInteractions();
+
     // Initialize word count and text status
     updateWordCount();
     updateTextStatus();
@@ -831,12 +873,133 @@ function insertLink() {
     }
 }
 
+let activeImage = null;
+let imageResizer = null;
+let isResizingImage = false;
+let imageResizeStartX = 0;
+let imageResizeStartWidth = 0;
+
 function insertImage() {
-    const url = prompt('Masukkan URL gambar:');
-    if (url) {
-        const imgHtml = `<img src="${url}" alt="User Image" style="max-width: 100%; height: auto;">`;
-        document.execCommand('insertHTML', false, imgHtml);
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/*';
+    fileInput.style.display = 'none';
+
+    fileInput.addEventListener('change', function() {
+        const file = fileInput.files && fileInput.files[0];
+        if (!file) {
+            document.body.removeChild(fileInput);
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const imgHtml = `<img src="${event.target.result}" alt="User Image" style="max-width: 100%; height: auto;">`;
+            document.execCommand('insertHTML', false, imgHtml);
+            enableImageInteractions();
+            document.body.removeChild(fileInput);
+            if (activeImage === null) {
+                const editor = document.getElementById('editor');
+                const images = editor.querySelectorAll('img');
+                const lastImage = images[images.length - 1];
+                if (lastImage) showImageResizer(lastImage);
+            }
+        };
+
+        reader.readAsDataURL(file);
+    });
+
+    document.body.appendChild(fileInput);
+    fileInput.click();
+}
+
+function createImageResizer() {
+    if (imageResizer) return;
+
+    imageResizer = document.createElement('div');
+    imageResizer.className = 'image-resizer';
+    imageResizer.style.display = 'none';
+    imageResizer.style.pointerEvents = 'none';
+
+    const handle = document.createElement('div');
+    handle.className = 'image-resize-handle';
+    handle.addEventListener('mousedown', startImageResize);
+    imageResizer.appendChild(handle);
+
+    document.body.appendChild(imageResizer);
+
+    document.addEventListener('mousemove', resizeImageMouseMove);
+    document.addEventListener('mouseup', endImageResize);
+}
+
+function startImageResize(event) {
+    if (!activeImage) return;
+
+    isResizingImage = true;
+    imageResizeStartX = event.clientX;
+    imageResizeStartWidth = activeImage.getBoundingClientRect().width;
+    event.preventDefault();
+    event.stopPropagation();
+}
+
+function resizeImageMouseMove(event) {
+    if (!isResizingImage || !activeImage) return;
+
+    const delta = event.clientX - imageResizeStartX;
+    const newWidth = Math.max(50, imageResizeStartWidth + delta);
+    activeImage.style.width = `${newWidth}px`;
+    activeImage.style.height = 'auto';
+    updateImageResizerPosition();
+}
+
+function endImageResize() {
+    if (!isResizingImage) return;
+    isResizingImage = false;
+}
+
+function showImageResizer(img) {
+    if (!img) return;
+    createImageResizer();
+
+    activeImage = img;
+    imageResizer.style.display = 'block';
+    imageResizer.style.pointerEvents = 'auto';
+    updateImageResizerPosition();
+}
+
+function hideImageResizer() {
+    if (!imageResizer) return;
+    imageResizer.style.display = 'none';
+    activeImage = null;
+}
+
+function updateImageResizerPosition() {
+    if (!activeImage || !imageResizer) return;
+
+    const rect = activeImage.getBoundingClientRect();
+    imageResizer.style.left = `${rect.left + window.scrollX - 4}px`;
+    imageResizer.style.top = `${rect.top + window.scrollY - 4}px`;
+    imageResizer.style.width = `${rect.width + 8}px`;
+    imageResizer.style.height = `${rect.height + 8}px`;
+}
+
+function enableImageInteractions() {
+    const editor = document.getElementById('editor');
+    if (!editor) return;
+
+    try {
+        document.execCommand('enableObjectResizing', false, true);
+        document.execCommand('enableInlineTableEditing', false, true);
+    } catch (e) {
+        console.warn('enableObjectResizing tidak didukung:', e);
     }
+
+    editor.querySelectorAll('img').forEach(img => {
+        img.setAttribute('draggable', 'true');
+        img.style.cursor = 'move';
+        img.style.maxWidth = '100%';
+        img.style.height = 'auto';
+    });
 }
 
 function insertDate() {
