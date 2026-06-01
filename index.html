@@ -53,6 +53,7 @@
                     <li><a href="#contoh" class="nav-link" data-page="contoh"><i class="fas fa-file-alt"></i> Contoh Surat</a></li>
                     <li><a href="#jenis" class="nav-link" data-page="jenis"><i class="fas fa-list"></i> Jenis Surat</a></li>
                     <li><a href="#template" class="nav-link" data-page="template"><i class="fas fa-edit"></i> Template Surat</a></li>
+                        <li><a href="#about" class="nav-link" data-page="about"><i class="fas fa-info-circle"></i> About</a></li>
                 </ul>
             </nav>
         </aside>
@@ -680,6 +681,48 @@
                 </div>
             </main>
 
+            <!-- About Section -->
+            <section id="about" class="page">
+                <div class="container">
+                    <div class="intro-section about-section">
+                        <div class="section-header">
+                            <div class="section-badge">
+                                <i class="fas fa-info-circle"></i>
+                                <span>Tentang</span>
+                            </div>
+                            <h3>Tentang NYURAT</h3>
+                            <p>NYURAT adalah aplikasi web interaktif yang dirancang untuk mempermudah pembuatan surat formal dan administratif.
+                            Aplikasi ini menggabungkan template terstruktur, editor yang mudah digunakan, dan fitur ekspor yang kompatibel dengan format dokumen umum.</p>
+                        </div>
+
+                        <div class="about-grid" style="display:flex;gap:2rem;align-items:flex-start;flex-wrap:wrap;">
+                            <div style="flex:1;min-width:300px;">
+                                <h4>Misi & Tujuan</h4>
+                                <p>NYURAT dikembangkan sebagai bagian dari tugas akademik oleh mahasiswa Program Studi Teknologi Informasi — Universitas Bangka Belitung. Tujuan utamanya adalah memberikan sarana praktis bagi mahasiswa dan pengguna umum untuk menulis surat yang rapi, sesuai kaidah, dan dapat langsung dicetak atau diekspor ke Word/PDF.</p>
+
+                                <h4 style="margin-top:1rem;">Fitur Utama</h4>
+                                <ul>
+                                    <li>Template surat resmi yang mudah disesuaikan</li>
+                                    <li>Editor WYSIWYG untuk penulisan dan pengaturan format</li>
+                                    <li>Pemeriksaan teks dasar dan highlight kesalahan</li>
+                                    <li>Ekspor langsung ke Word (.doc) dan PDF, serta fungsi cetak standar</li>
+                                </ul>
+                            </div>
+
+                            <div style="flex:1;min-width:260px;">
+                                <h4>Dibuat Oleh</h4>
+                                <p><strong>Mahasiswa Program Studi Teknologi Informasi</strong><br>Universitas Bangka Belitung</p>
+                                <p style="margin-top:0.5rem;color:#64748b;">Versi 1.0 — Proyek Mata Kuliah</p>
+
+                                <h4 style="margin-top:1rem;">Hubungi Kami</h4>
+                                <p>Untuk umpan balik, saran fitur, atau kolaborasi, silakan hubungi tim pengembang melalui email institusi atau koordinator mata kuliah.</p>
+                                <p style="margin-top:0.5rem;"><em>Note:</em> Alamat kontak sengaja disimpan sebagai placeholder — beri tahu saya jika ingin menambahkan email atau tautan resmi.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <footer class="footer">
                 <div class="container">
                     <p>&copy; 2026 NYURAT - Aplikasi Template Surat. All rights reserved.</p>
@@ -688,6 +731,8 @@
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="script.js"></script>
     
     <!-- Zoom Modal -->

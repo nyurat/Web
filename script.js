@@ -558,35 +558,67 @@ ${content}
     const exportPdfBtn = document.getElementById('exportPdfBtn');
     if (exportPdfBtn) {
         exportPdfBtn.addEventListener('click', function() {
-            const content = editor.innerHTML;
-            // Create a temporary div to extract text content
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = content;
-            const textContent = tempDiv.textContent || tempDiv.innerText;
-            
-            // Basic PDF generation using browser print
-            const printWindow = window.open('', '_blank');
-            printWindow.document.write(`
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <title>Cetak Surat</title>
-                    <style>
-                        body { font-family: 'Times New Roman', serif; margin: 20px; }
-                        .letter-template { max-width: 800px; margin: 0 auto; }
-                        .kop-surat { text-align: center; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #333; }
-                        .surat-content p { margin-bottom: 5px; }
-                        table { width: 100%; border-collapse: collapse; }
-                        table td { padding: 5px 0; }
-                    </style>
-                </head>
-                <body>
-                    ${content}
-                </body>
-                </html>
-            `);
-            printWindow.document.close();
-            printWindow.print();
+            const { jsPDF } = window.jspdf || {};
+            if (!jsPDF || typeof html2canvas === 'undefined') {
+                alert('Gagal mengekspor PDF. Pastikan koneksi internet tersambung.');
+                return;
+            }
+
+            const cloneWrapper = document.createElement('div');
+            cloneWrapper.style.position = 'absolute';
+            cloneWrapper.style.left = '-9999px';
+            cloneWrapper.style.top = '0';
+            cloneWrapper.style.width = '820px';
+            cloneWrapper.style.padding = '0';
+            cloneWrapper.style.background = '#ffffff';
+            cloneWrapper.style.overflow = 'visible';
+
+            const editorClone = editor.cloneNode(true);
+            editorClone.style.width = '800px';
+            editorClone.style.maxHeight = 'none';
+            editorClone.style.height = 'auto';
+            editorClone.style.overflow = 'visible';
+            editorClone.style.padding = '20px';
+            editorClone.style.margin = '0';
+            editorClone.style.boxSizing = 'border-box';
+            editorClone.style.background = '#ffffff';
+
+            cloneWrapper.appendChild(editorClone);
+            document.body.appendChild(cloneWrapper);
+
+            html2canvas(editorClone, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: '#ffffff',
+                windowWidth: 820,
+                windowHeight: editorClone.scrollHeight + 200
+            }).then(canvas => {
+                document.body.removeChild(cloneWrapper);
+
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'pt', 'a4');
+                const margin = 20;
+                const pdfWidth = pdf.internal.pageSize.getWidth() - margin * 2;
+                const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+                const pageHeight = pdf.internal.pageSize.getHeight() - margin * 2;
+
+                let position = 0;
+                pdf.addImage(imgData, 'PNG', margin, margin, pdfWidth, pdfHeight);
+                let heightLeft = pdfHeight - pageHeight;
+
+                while (heightLeft > 0) {
+                    position -= pageHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', margin, position + margin, pdfWidth, pdfHeight);
+                    heightLeft -= pageHeight;
+                }
+
+                pdf.save('surat_template.pdf');
+            }).catch(error => {
+                document.body.removeChild(cloneWrapper);
+                console.error('Export PDF error:', error);
+                alert('Terjadi kesalahan saat membuat PDF. Silakan coba lagi.');
+            });
         });
     }
     
@@ -648,10 +680,64 @@ ${content}
         });
     }
     
-    // Print functionality
+    // Print functionality — open a clean print window with A4 sizing
     if (printBtn) {
         printBtn.addEventListener('click', function() {
-            window.print();
+            try {
+                const printContent = editor.innerHTML;
+                const printWindow = window.open('', '_blank', 'width=900,height=700');
+
+                const styles = `
+                    <style>
+                        @page { size: A4; margin: 20mm; }
+                        html, body { height: 100%; }
+                        body { font-family: 'Times New Roman', serif; margin: 0; padding: 0; background: #ffffff; }
+                        .letter-template { width: 100%; max-width: 800px; margin: 0 auto; padding: 20px; box-sizing: border-box; }
+                        img { max-width: 100%; height: auto; }
+                        table { width: 100%; border-collapse: collapse; }
+                        p { margin: 0 0 8px 0; }
+                    </style>
+                `;
+
+                printWindow.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>Cetak Surat</title>${styles}</head><body><div class="letter-template">${printContent}</div></body></html>`);
+                printWindow.document.close();
+
+                // Wait until content (including images) is loaded before printing
+                const onReady = () => {
+                    clearTimeout(timeout);
+                    printWindow.focus();
+                    printWindow.print();
+                    // Do not force-close — some browsers block it. User can close manually.
+                };
+
+                const timeout = setTimeout(() => {
+                    // Fallback: just print after timeout
+                    try { printWindow.focus(); printWindow.print(); } catch (e) { console.error(e); }
+                }, 1500);
+
+                // If images exist, wait for them to load
+                const imgs = printWindow.document.images;
+                if (imgs && imgs.length > 0) {
+                    let loaded = 0;
+                    for (let i = 0; i < imgs.length; i++) {
+                        imgs[i].addEventListener('load', () => {
+                            loaded++;
+                            if (loaded === imgs.length) onReady();
+                        });
+                        imgs[i].addEventListener('error', () => {
+                            loaded++;
+                            if (loaded === imgs.length) onReady();
+                        });
+                    }
+                } else {
+                    // No images, ready immediately
+                    // Use small delay to allow fonts/styles to apply
+                    setTimeout(onReady, 300);
+                }
+            } catch (err) {
+                console.error('Print error:', err);
+                alert('Terjadi kesalahan saat menyiapkan cetak. Silakan coba lagi.');
+            }
         });
     }
     
